@@ -38,7 +38,7 @@ import numpy as np
 from numpy.random import choice
 from scipy.ndimage import binary_dilation
 
-from isaacgym import terrain_utils
+from legged_gym.utils import terrain_utils
 from legged_gym.envs.base.legged_robot_config import LeggedRobotCfg
 import tqdm
 
@@ -301,7 +301,7 @@ class Terrain:
                 terrain,
                 # float(os.environ["ISAAC_BLOCK_MIN_HEIGHT"]),
                 # float(os.environ["ISAAC_BLOCK_MAX_HEIGHT"]),
-                0.14,
+                0.10,
                 0.15,
                 rectangle_min_size,
                 rectangle_max_size,

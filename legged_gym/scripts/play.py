@@ -79,25 +79,6 @@ def play(args):
     env_cfg.domain_rand.stiffness_multiplier_range = [1.0, 1.0]
     env_cfg.domain_rand.damping_multiplier_range = [1.0, 1.0]
 
-
-    # env_cfg.terrain.mesh_type = 'plane'
-    if(env_cfg.terrain.mesh_type == 'plane'):
-        env_cfg.rewards.scales.feet_edge = 0
-        env_cfg.rewards.scales.feet_stumble = 0
-
-
-    if(args.terrain not in ['slope', 'stair', 'gap', 'climb', 'crawl', 'tilt']):
-        print('terrain should be one of slope, stair, gap, climb, crawl, and tilt, set to climb as default')
-        args.terrain = 'climb'
-    env_cfg.terrain.terrain_proportions = {
-        'slope': [0, 1.0, 0.0, 0, 0, 0, 0, 0, 0],
-        'stair': [0, 0, 1.0, 0, 0, 0, 0, 0, 0],
-        'gap': [0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0],
-        'climb': [0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0],
-        'tilt': [0, 0, 0, 0, 0, 0, 0, 1.0, 0, 0],
-        'crawl': [0, 0, 0, 0, 0, 0, 0, 0, 1.0, 0],
-     }[args.terrain]
-
     env_cfg.commands.ranges.lin_vel_x = [0.6, 0.6]
     env_cfg.commands.ranges.lin_vel_y = [-0.0, -0.0]
     env_cfg.commands.ranges.ang_vel_yaw = [0.0, 0.0]
