@@ -54,39 +54,58 @@ class A1AMPCfg(LeggedRobotCfg):
         amp_motion_files = MOTION_FILES
 
     class terrain:
-        mesh_type = 'trimesh'  # "heightfield" # none, plane, heightfield or trimesh
+        mesh_type = "trimesh"  # "heightfield" # none, plane, heightfield or trimesh
         horizontal_scale = 0.1  # [m]
         vertical_scale = 0.005  # [m]
         border_size = 25  # [m]
         curriculum = True
         static_friction = 1.0
         dynamic_friction = 1.0
-        restitution = 0.
+        restitution = 0.0
         # rough terrain only:
         measure_heights = True
-        measured_points_x = [-0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0., 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7,
-                             0.8]  # 1mx1.6m rectangle (without center line)
-        measured_points_y = [-0.5, -0.4, -0.3, -0.2, -0.1, 0., 0.1, 0.2, 0.3, 0.4, 0.5]
-
+        measured_points_x = [
+            -0.8,
+            -0.7,
+            -0.6,
+            -0.5,
+            -0.4,
+            -0.3,
+            -0.2,
+            -0.1,
+            0.0,
+            0.1,
+            0.2,
+            0.3,
+            0.4,
+            0.5,
+            0.6,
+            0.7,
+            0.8,
+        ]  # 1mx1.6m rectangle (without center line)
+        map_path = None
+        measured_points_y = [-0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5]
         # 525 dim, for depth image prediction
         measured_forward_points_x = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0,
                                      1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9,
                                      2.0]  # 1mx1.6m rectangle (without center line)
         measured_forward_points_y = [-1.2, -1.1, -1.0, -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0.,
                                      0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2]
-
-
+        
+        num_points = len(measured_points_x) * len(measured_points_y)
         selected = False  # select a unique terrain type and pass all arguments
         terrain_kwargs = None  # Dict of arguments for selected terrain
         max_init_terrain_level = 0  # starting curriculum state
-        terrain_length = 8.
-        terrain_width = 8.
+        terrain_length = 8.0
+        terrain_width = 8.0
         num_rows = 10  # number of terrain rows (levels)
         num_cols = 20  # number of terrain cols (types)
-        # terrain types: [wave, rough slope, stairs up, stairs down, discrete, gap, pit, tilt, crawl, rough_flat]
-        terrain_proportions = [0.0, 0.05, 0.15, 0.15, 0.0, 0.25, 0.25, 0.05, 0.05, 0.05]
+        # terrain types: [smooth slope, rough slope, stairs up, stairs down, discrete, custom_obs]
+        terrain_proportions = [0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
         # trimesh only:
-        slope_treshold = 0.75  # slopes above this threshold will be corrected to vertical surfaces
+        slope_treshold = (
+            0.75  # slopes above this threshold will be corrected to vertical surfaces
+        )
 
     class init_state(LeggedRobotCfg.init_state):
         pos = [0.0, 0.0, 0.35]  # x,y,z [m]
